@@ -166,3 +166,15 @@ while play_again:
         else:
             time.sleep(2)
             print("The syntax: " + play_input + " is not recognized!\n")
+
+# Functions
+# Introduction
+# Gamemode (Multiplayer or Singleplayer)
+# Gamemode Setup (two or one user)
+# create_found_letters
+# Input letter
+# check_float_letter
+# process_right_or_wrong
+# Output_Text (Presentation usw.)
+# Check won or lost
+# Ask play_again
