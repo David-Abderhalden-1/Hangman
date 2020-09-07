@@ -3,15 +3,13 @@ from Hangman_Phases import Phases
 import random
 
 
-# Variables_1
-letter_index = 100
-play_again = True
-
-
 # Functions&Classes
 
 class Functions:
     #Variables
+    def starter_variables(self):
+        self.play_again = True
+        self.letter_index = 100
 
     # Introduction
     def introduction(self):
@@ -65,7 +63,7 @@ class Functions:
                     i += 1
 
         elif self.single_player:
-            single_player_words = open("words_1.0.txt", "r")
+            single_player_words = open("words.txt", "r")
             single_player_words = list(single_player_words)
             index_count = -1
             for indx in single_player_words:
@@ -103,7 +101,6 @@ class Functions:
     def input_letter(self):
         self.user_letter = input("Enter a Letter: ")
         self.user_letter = self.user_letter.upper()
-        self.Right_letter = False
 
     # check_float_letter
     def check_float_letter(self):
@@ -119,8 +116,6 @@ class Functions:
                 self.Right_letter = True
 
         else:
-            time.sleep(2)
-            self.Right_letter = False
             self.used_letters.append(self.user_letter)
 
             return self.Right_letter, self.index_list, self.used_letters, self.word
@@ -170,58 +165,57 @@ class Functions:
             print(letter + ", ", end="")
         print("\n")
         print("_" * 82)
+
     # Check won or lost
+    def won_or_lost(self):
+        if self.found_letters == self.searched_word:
+            print("\n\n" + "*" * 29 + ' $You Won$ ' + "*" * 29 + "\n")
+
+        elif self.user_tries == self.maximum_tries:
+            print("The word was: " + self.searched_word)
+            print("\n\n" + "*" * 29 + ' You Lost! Game Over ' + "*" * 29 + "\n")
+
     # Ask play_again
+    def ask_play_again(self):
+        x = True
+        while x:
+            play_input = input("Do you want to play again? (a) Yes of course! (b) No maybe later. | Your answer: ")
+            if play_input.lower() == "a":
+                print("_" * 82)
+                self.play_again = True
+                x = False
+                time.sleep(2)
+            elif play_input.lower() == "b":
+                self.play_again = False
+                x = False
+                time.sleep(2)
+            else:
+                time.sleep(2)
+                print("The syntax: " + play_input + " is not recognized!\n")
+
+        return self.play_again
 
 
-# main________________________________________________________________________________________________
+# main
 
 # Introduction
 f = Functions()
 f.introduction()
 
 # Gamemode
-while play_again:
+
+f.starter_variables()
+
+while f.play_again:
     f.gamemode()
     f.gamemode_setup()
     f.create_found_letters()
     f.run_variables()
+
     while f.found_letters != f.searched_word and not f.user_tries == f.maximum_tries:
         f.input_letter()
         f.check_float_letter()
         f.effect()
 
-# Not yet done___________________________________________________________________________________________
-
-
-    time.sleep(2)
-    print("\nThe word: " + found_letters + "\n")
-    print("Wrong letters: ")
-    for letter in used_letters:
-        print(letter + ", ", end="")
-    print("\n")
-    print("_" * 82)
-
-if found_letters == searched_word:
-    print("\n\n" + "*" * 29 + ' $You Won$ ' + "*" * 29 + "\n")
-
-elif user_tries == maximum_tries:
-    print("The word was: " + searched_word)
-    print("\n\n" + "*" * 29 + ' You Lost! Game Over ' + "*" * 29 + "\n")
-
-time.sleep(4)
-x = True
-while x:
-    play_input = input("Do you want to play again? (a) Yes of course! (b) No maybe later. | Your answer: ")
-    if play_input.lower() == "a":
-        print("_" * 82)
-        play_again = True
-        x = False
-        time.sleep(2)
-    elif play_input.lower() == "b":
-        play_again = False
-        x = False
-        time.sleep(2)
-    else:
-        time.sleep(2)
-        print("The syntax: " + play_input + " is not recognized!\n")
+    f.won_or_lost()
+    f.ask_play_again()
