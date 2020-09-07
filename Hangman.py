@@ -59,6 +59,9 @@ while play_again:
             else:
                 time.sleep(2)
                 print("Error! The answer: " + user_answer + " is not recognized.")
+            while i <= 20 and word_entered:
+                print("/" * 37 + 'barrier!' + "/" * 37)
+                i += 1
 
     elif single_player:
         single_player_words = open("words_1.0.txt", "r")
@@ -74,9 +77,6 @@ while play_again:
         word = word[:x]
         searched_word = searched_word[:x]
 
-    while i <= 20 and two_users:
-        print("/" * 37 + 'barrier!' + "/" * 37)
-        i += 1
     time.sleep(2)
 
     # Game phase
@@ -101,7 +101,6 @@ while play_again:
 
         else:
             time.sleep(2)
-            print("The Letter: " + user_letter + " is not in the word!\n")
             Right_letter = False
             used_letters.append(user_letter)
 
@@ -118,10 +117,10 @@ while play_again:
                 temp[index] = letters
             result = ''.join(temp)
             found_letters = str(result)
-            word[letter_index] = "*"
 
         else:
             user_tries += 1
+            print("The Letter: " + user_letter + " is not in the word!\n")
             time.sleep(2)
             if user_tries == 1:
                 phases.phase_1()
