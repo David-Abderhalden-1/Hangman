@@ -94,18 +94,20 @@ class Functions:
     def run_variables(self):
         self.user_tries = 0
         self.maximum_tries = 6
+        self.index_list = []
+        self.used_letters = []
 
-        return  self.found_letters, self.user_tries
+        return self.maximum_tries, self.user_tries
 
     # Input letter
     def input_letter(self):
         self.user_letter = input("Enter a Letter: ")
         self.user_letter = self.user_letter.upper()
 
+        return self.user_letter
+
     # check_float_letter
     def check_float_letter(self):
-        self.index_list = []
-        self.used_letters = []
         self.Right_letter = False
         if self.word.count(self.user_letter) > 0:
             i = self.word.count(self.user_letter)
@@ -158,7 +160,6 @@ class Functions:
 
     # Output_Text (Presentation usw.)
     def output(self):
-        time.sleep(2)
         print("\nThe word: " + self.found_letters + "\n")
         print("Wrong letters: ")
         for letter in self.used_letters:
@@ -216,6 +217,7 @@ while f.play_again:
         f.input_letter()
         f.check_float_letter()
         f.effect()
+        f.output()
 
     f.won_or_lost()
     f.ask_play_again()
