@@ -15,10 +15,8 @@ class Functions:
     def introduction(self):
         print("\n\n" + '*' * 37 + " Hangman " + '*' * 37 + "\n")
         print("""\
-    Description: You have to guess a word. As you guess wrong letters, you will get
-                                hanged time to time. Good luck!""")
-        time.sleep(8)
-
+Description: You have to guess a word. As you guess wrong letters, you will get
+                            hanged time to time. Good luck!""")
 
     # Gamemode (Multiplayer or Singleplayer)
     def gamemode(self):
@@ -32,7 +30,6 @@ class Functions:
             elif user_input.lower() == "b":
                 self.single_player = True
             else:
-                time.sleep(2)
                 print("Error! The answer: " + user_input + " is not recognized.")
 
         return self.two_users, self.single_player, user_input
@@ -47,7 +44,6 @@ class Functions:
                 self.searched_word = input("\nPerson 1 enter your word here: ")
                 self.searched_word = self.searched_word.upper()
                 self.word = list(self.searched_word)
-                time.sleep(2)
                 user_answer = input("\nYour word is: " + self.searched_word +
                                     ". Do you want to proceed? (a) Yes (b) No | Your answer: ")
                 if user_answer.lower() == "a":
@@ -55,7 +51,6 @@ class Functions:
                 elif user_answer.lower() == "b":
                     word_entered = False
                 else:
-                    time.sleep(2)
                     print("Error! The answer: " + user_answer + " is not recognized.")
                 i = 5
                 while i <= 20 and word_entered:
@@ -77,8 +72,6 @@ class Functions:
             self.searched_word = self.searched_word[:x]
 
         return self.word, self.searched_word
-
-    time.sleep(2)
 
     # create_found_letters
     def create_found_letters(self):
@@ -142,7 +135,6 @@ class Functions:
         else:
             self.user_tries += 1
             print("The Letter: " + self.user_letter + " is not in the word!\n")
-            time.sleep(2)
             if self.user_tries == 1:
                 self.phases.phase_1()
             elif self.user_tries == 2:
@@ -185,13 +177,10 @@ class Functions:
                 print("_" * 82)
                 self.play_again = True
                 x = False
-                time.sleep(2)
             elif play_input.lower() == "b":
                 self.play_again = False
                 x = False
-                time.sleep(2)
             else:
-                time.sleep(2)
                 print("The syntax: " + play_input + " is not recognized!\n")
 
         return self.play_again
@@ -202,14 +191,17 @@ class Functions:
 # Introduction
 f = Functions()
 f.introduction()
+time.sleep(5)
 
-# Gamemode
+# Gamephase
 
 f.starter_variables()
 
 while f.play_again:
     f.gamemode()
+    time.sleep(1)
     f.gamemode_setup()
+    time.sleep(2)
     f.create_found_letters()
     f.run_variables()
 
@@ -217,7 +209,10 @@ while f.play_again:
         f.input_letter()
         f.check_float_letter()
         f.effect()
+        time.sleep(2)
         f.output()
+        time.sleep(1)
 
     f.won_or_lost()
+    time.sleep(5)
     f.ask_play_again()
